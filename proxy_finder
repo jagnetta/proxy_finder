@@ -1,0 +1,36 @@
+#!/bin/bash
+#set -x
+SERVICES="coreuc-edge-sip-proxy coreuc-media-proxy coreuc-proxy-registrar"
+DEV="vad vad vbd"
+STAGE="vas cas qa"
+PROD="aup aux bos brp cam cap dep fra hkp jnb lon sfo sgp ukp vap zap"
+# Wrong arguments
+if [ $# -eq 0 ]
+then
+  echo "Usage: $0 <dev|stage|prod|[dc]>"
+  echo
+  exit 1
+fi
+ARG1=${1:-dev}
+SERVER_LIST=
+case $ARG1 in
+  "dev")
+    SERVER_LIST=$DEV
+    ;;
+  "stage")
+    SERVER_LIST=$STAGE
+    ;;
+  "prod")
+    SERVER_LIST=$PROD
+    ;;
+  *)
+    SERVER_LIST=$1
+    ;;
+esac
+for service in $SERVICES; do
+  echo
+  echo "$service list"
+  for dc in $SERVER_LIST; do
+    curl -s http://$dc-consul1-1.tpn.thinkingphones.net:8500/v1/catalog/service/$service | jq -r '.[] | "\(.Datacenter): \(.ServiceMeta.uri | split(":")[1]) (\(.Address))"'
+  done
+done
