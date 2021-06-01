@@ -1,6 +1,6 @@
 #!/bin/bash
 #set -x
-SERVICES="coreuc-edge-sip-proxy coreuc-media-proxy coreuc-proxy-registrar"
+SERVICES="coreuc-edge-sip-proxy coreuc-media-proxy coreuc-proxy-registrar coreuc-interconnect-border-gateway-lb coreuc-interconnect-border-gateway"
 DEV="vad vad vbd"
 STAGE="vas cas qa"
 PROD="aup aux bos brp cam cap dep fra hkp jnb lon sfo sgp ukp vap zap"
