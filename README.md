@@ -1,4 +1,4 @@
-This tool was created by Nuno Ferreira, but I changed it to find the proxy_registrars and also add the ZAP DC
+This tool was created by Nuno Ferreira, but I've been keeping it up to date with new services and data centers.
 
 Usage: ./proxy_finder <dev|stage|prod|[dc]>
 
